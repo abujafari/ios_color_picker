@@ -71,6 +71,13 @@ ElevatedButton(
   },
   child: Text("Custom iOS for all"),
 ),
+
+/// Using the picker widget directly
+CustomColorPicker(
+  onColorSelected: (color) {
+    setState(() => backgroundColor = color);
+  },
+),
 ```
 ## You have to
 Dispose the controller because the streamer, check the example in example/ folder

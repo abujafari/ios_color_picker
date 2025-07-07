@@ -6,9 +6,16 @@ import 'package:ios_color_picker/custom_picker/shared.dart';
 import 'color_observer.dart';
 import 'helpers/cache_helper.dart';
 
+import 'localization.dart';
+
 class PickersSelectorRow extends StatefulWidget {
   final ValueChanged<Color> onColorChanged;
-  const PickersSelectorRow({super.key, required this.onColorChanged});
+  final IosColorPickerLocalizations localization;
+  const PickersSelectorRow({
+    super.key,
+    required this.onColorChanged,
+    this.localization = const IosColorPickerLocalizations(),
+  });
 
   @override
   State<PickersSelectorRow> createState() => _PickersSelectorRowState();
@@ -16,10 +23,15 @@ class PickersSelectorRow extends StatefulWidget {
 
 class _PickersSelectorRowState extends State<PickersSelectorRow> {
   int typeIndex = 0;
-  final List<String> typeText = ["Grid", "Spectrum", "Sliders"];
+  late final List<String> typeText;
 
   @override
   void initState() {
+    typeText = [
+      widget.localization.gridTab,
+      widget.localization.spectrumTab,
+      widget.localization.slidersTab,
+    ];
     (CacheHelper().getData(key: "selector_index") as Future<dynamic>)
         .then((onValue) {
       if (onValue != null && onValue is int) {
@@ -178,6 +190,7 @@ class _PickersSelectorRowState extends State<PickersSelectorRow> {
                 return SlidePicker(
                   enableAlpha: false,
                   pickerColor: color,
+                  localization: widget.localization,
                   onColorChanged: (Color value) {
                     colorController.updateColor(value);
                     widget.onColorChanged(colorController.value);

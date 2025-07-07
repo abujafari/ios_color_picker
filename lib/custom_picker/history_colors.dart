@@ -6,10 +6,16 @@ import 'package:super_tooltip/super_tooltip.dart';
 import 'color_observer.dart';
 import 'extensions.dart';
 import 'helpers/cache_helper.dart';
+import 'localization.dart';
 
 class HistoryColors extends StatefulWidget {
   final ValueChanged<Color> onColorChanged;
-  const HistoryColors({super.key, required this.onColorChanged});
+  final IosColorPickerLocalizations localization;
+  const HistoryColors({
+    super.key,
+    required this.onColorChanged,
+    this.localization = const IosColorPickerLocalizations(),
+  });
 
   @override
   State<HistoryColors> createState() => _HistoryColorsState();
@@ -170,7 +176,7 @@ class _HistoryColorsState extends State<HistoryColors> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 8, horizontal: 12),
                           child: Text(
-                            "Delete",
+                            widget.localization.deleteTooltip,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium

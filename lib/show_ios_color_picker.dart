@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'custom_picker/color_observer.dart';
 import 'custom_picker/ios_color_picker.dart';
+import 'custom_picker/custom_color_picker.dart';
 import 'custom_picker/extensions.dart';
+import 'custom_picker/localization.dart';
 import 'native_picker/ios_color_picker_platform_interface.dart';
 
 ///Don't forget to Dispose the controller
@@ -53,6 +55,7 @@ class IOSColorPickerController {
     required BuildContext context,
     required ValueChanged<Color> onColorChanged,
     Color? startingColor,
+    IosColorPickerLocalizations localization = const IosColorPickerLocalizations(),
   }) async {
     colorController = ColorController(startingColor ?? selectedColor);
     return showModalBottomSheet(
@@ -62,12 +65,30 @@ class IOSColorPickerController {
         context: context,
         builder: (context) {
           return IosColorPicker(
+            localization: localization,
             onColorSelected: (value) {
               selectedColor = value;
               onColorChanged(selectedColor);
             },
           );
         });
+  }
+
+  /// Returns the color picker widget so you can embed it anywhere.
+  Widget iosColorPickerWidget({
+    required ValueChanged<Color> onColorChanged,
+    Color? startingColor,
+    IosColorPickerLocalizations localization =
+        const IosColorPickerLocalizations(),
+  }) {
+    colorController = ColorController(startingColor ?? selectedColor);
+    return CustomColorPicker(
+      localization: localization,
+      onColorSelected: (value) {
+        selectedColor = value;
+        onColorChanged(selectedColor);
+      },
+    );
   }
 
   /// Cancel the color subscription

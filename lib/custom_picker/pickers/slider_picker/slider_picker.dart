@@ -3,6 +3,7 @@ import 'package:ios_color_picker/custom_picker/extensions.dart';
 import 'package:ios_color_picker/custom_picker/pickers/slider_picker/slider_helper.dart';
 import '../../shared.dart';
 import '../../utils.dart';
+import '../../localization.dart';
 
 class SlidePicker extends StatefulWidget {
   const SlidePicker({
@@ -29,6 +30,7 @@ class SlidePicker extends StatefulWidget {
     this.indicatorAlignmentEnd = const Alignment(1.0, 3.0),
     this.displayThumbColor = true,
     this.indicatorBorderRadius = const BorderRadius.all(Radius.zero),
+    this.localization = const IosColorPickerLocalizations(),
   });
 
   final Color pickerColor;
@@ -48,6 +50,7 @@ class SlidePicker extends StatefulWidget {
   final AlignmentGeometry indicatorAlignmentEnd;
   final bool displayThumbColor;
   final BorderRadius indicatorBorderRadius;
+  final IosColorPickerLocalizations localization;
 
   @override
   State<StatefulWidget> createState() => _SlidePickerState();
@@ -188,7 +191,7 @@ class _SlidePickerState extends State<SlidePicker> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                "Display P3 Hex Color #",
+                widget.localization.displayP3Label,
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium

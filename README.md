@@ -74,6 +74,7 @@ ElevatedButton(
 
 /// Using the picker widget directly
 CustomColorPicker(
+  initColor: backgroundColor,
   onColorSelected: (color) {
     setState(() => backgroundColor = color);
   },

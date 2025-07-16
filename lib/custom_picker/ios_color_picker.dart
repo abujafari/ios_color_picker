@@ -10,11 +10,13 @@ class IosColorPicker extends StatelessWidget {
     super.key,
     required this.onColorSelected,
     this.localization = const IosColorPickerLocalizations(),
+    this.initColor,
   });
 
   ///returns the selected color
   final ValueChanged<Color> onColorSelected;
   final IosColorPickerLocalizations localization;
+  final Color? initColor;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class IosColorPicker extends StatelessWidget {
           localization: localization,
           onColorSelected: onColorSelected,
           onClose: () => Navigator.pop(context),
+          initColor: initColor,
         ),
       ],
     );

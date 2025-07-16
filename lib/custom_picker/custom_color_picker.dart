@@ -12,12 +12,14 @@ class CustomColorPicker extends StatefulWidget {
   final ValueChanged<Color> onColorSelected;
   final IosColorPickerLocalizations localization;
   final VoidCallback? onClose;
+  final Color? initColor;
 
   const CustomColorPicker({
     super.key,
     required this.onColorSelected,
     this.localization = const IosColorPickerLocalizations(),
     this.onClose,
+    this.initColor,
   });
 
   @override
@@ -28,6 +30,9 @@ class _CustomColorPickerState extends State<CustomColorPicker> {
   @override
   void initState() {
     CacheHelper.init();
+    if (widget.initColor != null) {
+      colorController = ColorController(widget.initColor!);
+    }
     super.initState();
   }
 

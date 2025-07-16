@@ -55,9 +55,9 @@ class IOSColorPickerController {
     required BuildContext context,
     required ValueChanged<Color> onColorChanged,
     Color? startingColor,
-    IosColorPickerLocalizations localization = const IosColorPickerLocalizations(),
+    IosColorPickerLocalizations localization =
+        const IosColorPickerLocalizations(),
   }) async {
-    colorController = ColorController(startingColor ?? selectedColor);
     return showModalBottomSheet(
         backgroundColor: Colors.transparent,
         barrierColor: Colors.black26,
@@ -66,6 +66,7 @@ class IOSColorPickerController {
         builder: (context) {
           return IosColorPicker(
             localization: localization,
+            initColor: startingColor ?? selectedColor,
             onColorSelected: (value) {
               selectedColor = value;
               onColorChanged(selectedColor);
@@ -81,9 +82,9 @@ class IOSColorPickerController {
     IosColorPickerLocalizations localization =
         const IosColorPickerLocalizations(),
   }) {
-    colorController = ColorController(startingColor ?? selectedColor);
     return CustomColorPicker(
       localization: localization,
+      initColor: startingColor ?? selectedColor,
       onColorSelected: (value) {
         selectedColor = value;
         onColorChanged(selectedColor);
